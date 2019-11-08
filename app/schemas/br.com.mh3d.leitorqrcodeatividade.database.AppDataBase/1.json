@@ -1,0 +1,185 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "f80d558bff6c695ca13bd9bac93f30b4",
+    "entities": [
+      {
+        "tableName": "trabalho_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_trabalho` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_usuario` INTEGER NOT NULL, `nome_usuario` TEXT, `id_atividade` INTEGER NOT NULL, `tempo_inicio` TEXT, `tempo_fim` TEXT, `id_relatorio` INTEGER NOT NULL, `local` TEXT, FOREIGN KEY(`id_atividade`) REFERENCES `atividade_table`(`id_atividade`) ON UPDATE CASCADE ON DELETE CASCADE , FOREIGN KEY(`id_relatorio`) REFERENCES `relatorio_table`(`id_relatorio`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id_trabalho",
+            "columnName": "id_trabalho",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "id_usuario",
+            "columnName": "id_usuario",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "nome_usuario",
+            "columnName": "nome_usuario",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id_atividade",
+            "columnName": "id_atividade",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tempo_inicio",
+            "columnName": "tempo_inicio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tempo_fim",
+            "columnName": "tempo_fim",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id_relatorio",
+            "columnName": "id_relatorio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "local",
+            "columnName": "local",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_trabalho"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_trabalho_table_id_atividade",
+            "unique": false,
+            "columnNames": [
+              "id_atividade"
+            ],
+            "createSql": "CREATE  INDEX `index_trabalho_table_id_atividade` ON `${TABLE_NAME}` (`id_atividade`)"
+          },
+          {
+            "name": "index_trabalho_table_id_relatorio",
+            "unique": false,
+            "columnNames": [
+              "id_relatorio"
+            ],
+            "createSql": "CREATE  INDEX `index_trabalho_table_id_relatorio` ON `${TABLE_NAME}` (`id_relatorio`)"
+          }
+        ],
+        "foreignKeys": [
+          {
+            "table": "atividade_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "id_atividade"
+            ],
+            "referencedColumns": [
+              "id_atividade"
+            ]
+          },
+          {
+            "table": "relatorio_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "CASCADE",
+            "columns": [
+              "id_relatorio"
+            ],
+            "referencedColumns": [
+              "id_relatorio"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "atividade_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_atividade` INTEGER NOT NULL, `atividade` TEXT, PRIMARY KEY(`id_atividade`))",
+        "fields": [
+          {
+            "fieldPath": "id_atividade",
+            "columnName": "id_atividade",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "atividade",
+            "columnName": "atividade",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_atividade"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_atividade_table_id_atividade",
+            "unique": true,
+            "columnNames": [
+              "id_atividade"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_atividade_table_id_atividade` ON `${TABLE_NAME}` (`id_atividade`)"
+          }
+        ],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "relatorio_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_relatorio` INTEGER NOT NULL, `relatorio` TEXT, PRIMARY KEY(`id_relatorio`))",
+        "fields": [
+          {
+            "fieldPath": "id_relatorio",
+            "columnName": "id_relatorio",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "relatorio",
+            "columnName": "relatorio",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_relatorio"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [
+          {
+            "name": "index_relatorio_table_id_relatorio",
+            "unique": true,
+            "columnNames": [
+              "id_relatorio"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_relatorio_table_id_relatorio` ON `${TABLE_NAME}` (`id_relatorio`)"
+          }
+        ],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f80d558bff6c695ca13bd9bac93f30b4\")"
+    ]
+  }
+}

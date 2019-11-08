@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/txt_id_trabalho"
+            style="@style/Widget.AppCompat.TextView.SpinnerItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="1" />
+
+        <TextView
+            android:id="@+id/txt_nome_usuario"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/txt_id_trabalho"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="5dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Usuario" />
+
+        <TextView
+            android:id="@+id/txt_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="20dp"
+            android:text="Local" />
+
+        <TextView
+            android:id="@+id/txt_atividade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_nome_usuario"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="11dp"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="end"
+            android:maxLines="3"
+            android:text="Atividade feita" />
+
+        <TextView
+            android:id="@+id/txt_tempo_inicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_atividade"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="Iniciada em  19/07/1994 18:05:30" />
+
+        <TextView
+            android:id="@+id/txt_relatorio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_tempo_inicio"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="false"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:maxLines="2"
+            android:text="relatorio" />
+
+        <TextView
+            android:id="@+id/txt_tempo_fim"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txt_relatorio"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="finalizada em  19/07/1994 18:05:30" />
+
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
