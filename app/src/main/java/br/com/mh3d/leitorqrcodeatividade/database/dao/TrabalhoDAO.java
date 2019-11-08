@@ -37,11 +37,25 @@ public interface TrabalhoDAO {
             "FROM trabalho_table t " +
             "JOIN atividade_table a ON t.id_atividade = a.id_atividade " +
             "JOIN relatorio_table r ON t.id_relatorio = r.id_relatorio " +
+            "WHERE t.tempo_fim IS NULL  " +
+            "ORDER BY t.tempo_inicio DESC")
+    LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoConcluidos();
+
+    @Query("SELECT t.*, a.atividade , r.relatorio " +
+            "FROM trabalho_table t " +
+            "JOIN atividade_table a ON t.id_atividade = a.id_atividade " +
+            "JOIN relatorio_table r ON t.id_relatorio = r.id_relatorio " +
+            "WHERE t.tempo_fim IS NOT NULL " +
+            "ORDER BY t.tempo_inicio DESC")
+    LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoEmAndamento();
+
+    @Query("SELECT t.*, a.atividade , r.relatorio " +
+            "FROM trabalho_table t " +
+            "JOIN atividade_table a ON t.id_atividade = a.id_atividade " +
+            "JOIN relatorio_table r ON t.id_relatorio = r.id_relatorio " +
             "WHERE id_usuario=:id_usuario " +
             "ORDER BY id_trabalho DESC " +
             "LIMIT 1 ")
     LiveData<TrabalhoComAtividadeRelatorio> getUserById(int id_usuario);
-
-
 
 }

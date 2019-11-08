@@ -15,11 +15,15 @@ import br.com.mh3d.leitorqrcodeatividade.models.TrabalhoComAtividadeRelatorio;
 public class TrabalhoRepository {
     private TrabalhoDAO trabalhoDAO;
     private LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoTrabalhos;
+    private LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoEmAndamento;
+    private LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoConcluido;
 
     public TrabalhoRepository(Application application) {
         AppDataBase trabalhoDatabase = AppDataBase.getInstance(application);
         trabalhoDAO = trabalhoDatabase.trabalhoDAO();
+        getHistoricoEmAndamento = trabalhoDAO.getHistoricoEmAndamento();
         getHistoricoTrabalhos = trabalhoDAO.getHistoricoTrabalhos();
+        getHistoricoConcluido = trabalhoDAO.getHistoricoConcluidos();
     }
 
 
@@ -38,9 +42,17 @@ public class TrabalhoRepository {
     }
 
 
+    public LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoEmAndamento() {
+        return getHistoricoEmAndamento;
+    }
     public LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoTrabalhos() {
         return getHistoricoTrabalhos;
     }
+    public LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoConcluido() {
+        return getHistoricoConcluido;
+    }
+
+
 
 
     public LiveData<TrabalhoComAtividadeRelatorio> getGetUserById(int id_usuario){

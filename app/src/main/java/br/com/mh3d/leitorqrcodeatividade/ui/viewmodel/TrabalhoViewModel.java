@@ -16,11 +16,15 @@ public class TrabalhoViewModel extends AndroidViewModel {
 
     private TrabalhoRepository trabalhoRepository;
     private LiveData<List<TrabalhoComAtividadeRelatorio>> historicoAtividades;
+    private LiveData<List<TrabalhoComAtividadeRelatorio>> historicoConcluido;
+    private LiveData<List<TrabalhoComAtividadeRelatorio>> historicoEmAndamento;
 
     public TrabalhoViewModel(@NonNull Application application) {
         super(application);
         trabalhoRepository = new TrabalhoRepository(application);
+        historicoEmAndamento = trabalhoRepository.getHistoricoConcluido();
         historicoAtividades = trabalhoRepository.getHistoricoTrabalhos();
+        historicoConcluido = trabalhoRepository.getHistoricoEmAndamento();
     }
 
     public void insert(Trabalho trabalho){
@@ -33,6 +37,12 @@ public class TrabalhoViewModel extends AndroidViewModel {
 
     public LiveData<List<TrabalhoComAtividadeRelatorio>> getHistoricoTrabalhos() {
         return historicoAtividades;
+    }
+    public LiveData<List<TrabalhoComAtividadeRelatorio>> gethistoricoConcluido() {
+        return historicoConcluido;
+    }
+    public LiveData<List<TrabalhoComAtividadeRelatorio>> gethistoricoEmAndamento() {
+        return historicoEmAndamento;
     }
 
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,12 +24,16 @@ public class HistoricoFragment extends Fragment {
 
     private TrabalhoViewModel trabalhoViewModel;
     private List<TrabalhoComAtividadeRelatorio> mHistorico;
+    private Button historicoTodos;
+    private Button historicoEmAndamento;
+    private Button historicoConcluido;
+
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_historico, container, false);
 
-        RecyclerView recyclerView = root.findViewById(R.id.recycler_historico);
+      final  RecyclerView recyclerView = root.findViewById(R.id.recycler_historico);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
 
@@ -36,13 +41,61 @@ public class HistoricoFragment extends Fragment {
         recyclerView.setAdapter(adapter);
 
 
+
+
+        historicoTodos = root.findViewById(R.id.button_historico_todos);
+        historicoEmAndamento = root.findViewById(R.id.button_historico_andamento);
+        historicoConcluido = root.findViewById(R.id.button_historico_concluidos);
         trabalhoViewModel = ViewModelProviders.of(getActivity()).get(TrabalhoViewModel.class);
-        trabalhoViewModel.getHistoricoTrabalhos().observe(getActivity(), new Observer<List<TrabalhoComAtividadeRelatorio>>() {
+        historicoEmAndamento.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(List<TrabalhoComAtividadeRelatorio> historico) {
-                adapter.setHistorico(historico);
+            public void onClick(View v) {
+
+                trabalhoViewModel.gethistoricoEmAndamento().observe(getActivity(), new Observer<List<TrabalhoComAtividadeRelatorio>>() {
+                    @Override
+                    public void onChanged(List<TrabalhoComAtividadeRelatorio> historico) {
+                        recyclerView.setAdapter(adapter);
+                        adapter.setHistorico(historico);
+                    }
+                });
+
             }
         });
+
+        historicoTodos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                trabalhoViewModel.getHistoricoTrabalhos().observe(getActivity(), new Observer<List<TrabalhoComAtividadeRelatorio>>() {
+                    @Override
+                    public void onChanged(List<TrabalhoComAtividadeRelatorio> historico) {
+                        recyclerView.setAdapter(adapter);
+                        adapter.setHistorico(historico);
+                    }
+                });
+
+            }
+        });
+
+
+        historicoConcluido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                trabalhoViewModel.gethistoricoConcluido().observe(getActivity(), new Observer<List<TrabalhoComAtividadeRelatorio>>() {
+                    @Override
+                    public void onChanged(List<TrabalhoComAtividadeRelatorio> historico) {
+                        recyclerView.setAdapter(adapter);
+                        adapter.setHistorico(historico);
+                    }
+                });
+
+            }
+        });
+
+
+
+
 
 
         return root;
