@@ -136,18 +136,11 @@ public class AddUpdateTrabalhodesActivity extends AppCompatActivity implements C
 
     @Override
     public void finalizarTrabalho(TrabalhoComAtividadeRelatorio trabalho, Relatorio relatorio, String tempo) {
-        Trabalho finalizarTrabalho = new Trabalho();
-        finalizarTrabalho.setLocal(trabalho.getLocal());
-        finalizarTrabalho.setId_trabalho(trabalho.getId_trabalho());
-        finalizarTrabalho.setId_usuario(trabalho.getId_usuario());
-        finalizarTrabalho.setNome_usuario(trabalho.getNome_usuario());
-        finalizarTrabalho.setId_atividade(trabalho.getId_atividade());
-        finalizarTrabalho.setTempo_inicio(trabalho.getTempo_inicio());
-        finalizarTrabalho.setTempo_fim(tempo);
-        finalizarTrabalho.setId_relatorio(relatorio.getId_relatorio());
+        trabalho.getTrabalho().setTempo_fim(tempo);
+        trabalho.getTrabalho().setId_relatorio(relatorio.getId_relatorio());
 
         Intent data = new Intent();
-        data.putExtra("Trabalho", finalizarTrabalho);
+        data.putExtra("Trabalho", trabalho);
 
         setResult(RESULT_OK, data);
         finish();

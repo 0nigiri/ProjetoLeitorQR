@@ -35,17 +35,17 @@ public class TrabalhoAdapter extends RecyclerView.Adapter<TrabalhoAdapter.Trabal
     public void onBindViewHolder(@NonNull TrabalhoHolder holder, int position) {
 
         TrabalhoComAtividadeRelatorio currentTrabalho = historico.get(position);
-        holder.txtViewIdTrabalho.setText(String.valueOf(currentTrabalho.getId_trabalho()));
-        holder.txtViewLocal.setText((currentTrabalho.getLocal()));
-        holder.txtViewNomeFuncionario.setText(currentTrabalho.getNome_usuario());
-        holder.txtViewAtividade.setText(currentTrabalho.getAtividade());
-        holder.txtViewTempoInicio.setText("Iniciado em " + dateFormatUtils.convertUnixStringToDateString(currentTrabalho.getTempo_inicio()));
-        if(currentTrabalho.getTempo_fim() != null && !currentTrabalho.getTempo_fim().equals("")) {
+        holder.txtViewIdTrabalho.setText(String.valueOf(currentTrabalho.getTrabalho().getId_trabalho()));
+        holder.txtViewLocal.setText((currentTrabalho.getTrabalho().getLocal()));
+        holder.txtViewNomeFuncionario.setText(currentTrabalho.getTrabalho().getNome_usuario());
+        holder.txtViewAtividade.setText(currentTrabalho.getAtividades().getAtividade());
+        holder.txtViewTempoInicio.setText("Iniciado em " + dateFormatUtils.convertUnixStringToDateString(currentTrabalho.getTrabalho().getTempo_inicio()));
+        if(currentTrabalho.getTrabalho().getTempo_fim() != null && !currentTrabalho.getTrabalho().getTempo_fim().equals("")) {
 
             holder.txtViewTempoFim.setVisibility(View.VISIBLE);
-            holder.txtViewTempoFim.setText("Finalizado em " + dateFormatUtils.convertUnixStringToDateString(currentTrabalho.getTempo_fim()));
+            holder.txtViewTempoFim.setText("Finalizado em " + dateFormatUtils.convertUnixStringToDateString(currentTrabalho.getTrabalho().getTempo_fim()));
             holder.txtViewRelatorio.setVisibility(View.VISIBLE);
-            holder.txtViewRelatorio.setText(currentTrabalho.getRelatorio());
+            holder.txtViewRelatorio.setText(currentTrabalho.getRelatorio().getRelatorio());
 
         } else {
             holder.txtViewTempoFim.setVisibility(View.GONE);

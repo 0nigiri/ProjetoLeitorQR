@@ -22,9 +22,9 @@ public class TrabalhoViewModel extends AndroidViewModel {
     public TrabalhoViewModel(@NonNull Application application) {
         super(application);
         trabalhoRepository = new TrabalhoRepository(application);
-        historicoEmAndamento = trabalhoRepository.getHistoricoConcluido();
+        historicoEmAndamento = trabalhoRepository.getHistoricoEmAndamento();
         historicoAtividades = trabalhoRepository.getHistoricoTrabalhos();
-        historicoConcluido = trabalhoRepository.getHistoricoEmAndamento();
+        historicoConcluido = trabalhoRepository.getHistoricoConcluido();
     }
 
     public void insert(Trabalho trabalho){

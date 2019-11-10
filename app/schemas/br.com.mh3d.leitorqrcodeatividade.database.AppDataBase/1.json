@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "f80d558bff6c695ca13bd9bac93f30b4",
+    "identityHash": "d534075d4aa3c643abe91edb356eb33c",
     "entities": [
       {
         "tableName": "trabalho_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_trabalho` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_usuario` INTEGER NOT NULL, `nome_usuario` TEXT, `id_atividade` INTEGER NOT NULL, `tempo_inicio` TEXT, `tempo_fim` TEXT, `id_relatorio` INTEGER NOT NULL, `local` TEXT, FOREIGN KEY(`id_atividade`) REFERENCES `atividade_table`(`id_atividade`) ON UPDATE CASCADE ON DELETE CASCADE , FOREIGN KEY(`id_relatorio`) REFERENCES `relatorio_table`(`id_relatorio`) ON UPDATE CASCADE ON DELETE CASCADE )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_trabalho` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_usuario` INTEGER NOT NULL, `nome_usuario` TEXT, `trabalho_id_atividade` INTEGER NOT NULL, `tempo_inicio` TEXT, `tempo_fim` TEXT, `trabalho_id_relatorio` INTEGER NOT NULL, `local` TEXT, FOREIGN KEY(`trabalho_id_atividade`) REFERENCES `atividade_table`(`id_atividade`) ON UPDATE CASCADE ON DELETE CASCADE , FOREIGN KEY(`trabalho_id_relatorio`) REFERENCES `relatorio_table`(`id_relatorio`) ON UPDATE CASCADE ON DELETE CASCADE )",
         "fields": [
           {
             "fieldPath": "id_trabalho",
@@ -28,7 +28,7 @@
           },
           {
             "fieldPath": "id_atividade",
-            "columnName": "id_atividade",
+            "columnName": "trabalho_id_atividade",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -46,7 +46,7 @@
           },
           {
             "fieldPath": "id_relatorio",
-            "columnName": "id_relatorio",
+            "columnName": "trabalho_id_relatorio",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -65,20 +65,20 @@
         },
         "indices": [
           {
-            "name": "index_trabalho_table_id_atividade",
+            "name": "index_trabalho_table_trabalho_id_atividade",
             "unique": false,
             "columnNames": [
-              "id_atividade"
+              "trabalho_id_atividade"
             ],
-            "createSql": "CREATE  INDEX `index_trabalho_table_id_atividade` ON `${TABLE_NAME}` (`id_atividade`)"
+            "createSql": "CREATE  INDEX `index_trabalho_table_trabalho_id_atividade` ON `${TABLE_NAME}` (`trabalho_id_atividade`)"
           },
           {
-            "name": "index_trabalho_table_id_relatorio",
+            "name": "index_trabalho_table_trabalho_id_relatorio",
             "unique": false,
             "columnNames": [
-              "id_relatorio"
+              "trabalho_id_relatorio"
             ],
-            "createSql": "CREATE  INDEX `index_trabalho_table_id_relatorio` ON `${TABLE_NAME}` (`id_relatorio`)"
+            "createSql": "CREATE  INDEX `index_trabalho_table_trabalho_id_relatorio` ON `${TABLE_NAME}` (`trabalho_id_relatorio`)"
           }
         ],
         "foreignKeys": [
@@ -87,7 +87,7 @@
             "onDelete": "CASCADE",
             "onUpdate": "CASCADE",
             "columns": [
-              "id_atividade"
+              "trabalho_id_atividade"
             ],
             "referencedColumns": [
               "id_atividade"
@@ -98,7 +98,7 @@
             "onDelete": "CASCADE",
             "onUpdate": "CASCADE",
             "columns": [
-              "id_relatorio"
+              "trabalho_id_relatorio"
             ],
             "referencedColumns": [
               "id_relatorio"
@@ -179,7 +179,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"f80d558bff6c695ca13bd9bac93f30b4\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"d534075d4aa3c643abe91edb356eb33c\")"
     ]
   }
 }

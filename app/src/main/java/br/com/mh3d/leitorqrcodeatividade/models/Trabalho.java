@@ -17,18 +17,18 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = "trabalho_table",
         foreignKeys = { @ForeignKey(    entity = Atividades.class,
                                         parentColumns = "id_atividade",
-                                        childColumns = "id_atividade",
+                                        childColumns = "trabalho_id_atividade",
                                         onDelete = ForeignKey.CASCADE,
                                         onUpdate = ForeignKey.CASCADE
                         ),
                         @ForeignKey(    entity = Relatorio.class,
                                         parentColumns = "id_relatorio",
-                                        childColumns = "id_relatorio",
+                                        childColumns = "trabalho_id_relatorio",
                                         onDelete = ForeignKey.CASCADE,
                                         onUpdate = ForeignKey.CASCADE
                         )} ,
-        indices     = { @Index("id_atividade"),
-                        @Index("id_relatorio")
+        indices     = { @Index(value = "trabalho_id_atividade"),
+                        @Index(value = "trabalho_id_relatorio")
         })
 public class Trabalho implements Parcelable {
 
@@ -40,13 +40,13 @@ public class Trabalho implements Parcelable {
     private int id_usuario;
     @ColumnInfo(name = "nome_usuario")
     private String nome_usuario;
-    @ColumnInfo(name = "id_atividade")
+    @ColumnInfo(name = "trabalho_id_atividade")
     private int id_atividade;
     @ColumnInfo(name = "tempo_inicio")
     private String tempo_inicio;
     @ColumnInfo(name = "tempo_fim")
     private String tempo_fim;
-    @ColumnInfo(name = "id_relatorio")
+    @ColumnInfo(name = "trabalho_id_relatorio")
     private int id_relatorio;
     @ColumnInfo(name = "local")
     private String local;

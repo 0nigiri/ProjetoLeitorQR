@@ -83,9 +83,9 @@ public class IdentificationActivity extends AppCompatActivity {
                     });
 
                 } else {
-                    if (ultimoTrabalho.getTempo_inicio() == null || ultimoTrabalho.getTempo_fim() != null) {
+                    if (ultimoTrabalho.getTrabalho().getTempo_inicio() == null || ultimoTrabalho.getTrabalho().getTempo_fim() != null) {
                         //Iniciar nova atividade
-                        resultado = "Id : " + ultimoTrabalho.getId_usuario() + "\nNome : " + ultimoTrabalho.getNome_usuario();
+                        resultado = "Id : " + ultimoTrabalho.getTrabalho().getId_usuario() + "\nNome : " + ultimoTrabalho.getTrabalho().getNome_usuario();
                         txt_resultado.setText(resultado);
                         btn_iniciar_atividade.setVisibility(View.VISIBLE);
                         btn_finalizar_atividade.setVisibility(View.GONE);
@@ -96,8 +96,8 @@ public class IdentificationActivity extends AppCompatActivity {
                                 Intent intent = new Intent(IdentificationActivity.this, AddUpdateTrabalhodesActivity.class);
                                 Bundle data = new Bundle();
                                 Trabalho novoTrabalho = new Trabalho();
-                                novoTrabalho.setId_usuario(ultimoTrabalho.getId_usuario());
-                                novoTrabalho.setNome_usuario(ultimoTrabalho.getNome_usuario());
+                                novoTrabalho.setId_usuario(ultimoTrabalho.getTrabalho().getId_usuario());
+                                novoTrabalho.setNome_usuario(ultimoTrabalho.getTrabalho().getNome_usuario());
                                 novoTrabalho.setLocal(local);
                                 data.putParcelable("Criar nova Tarefa", novoTrabalho);
                                 saveLocal();
@@ -109,19 +109,16 @@ public class IdentificationActivity extends AppCompatActivity {
 
                     } else {
                         //Abrir ultima atividade e finalizar atividade
-                        resultado = "Id : " + ultimoTrabalho.getId_usuario() +
-                                "\nNome : " + ultimoTrabalho.getNome_usuario() +
-                                "\nAtividade : " + ultimoTrabalho.getAtividade() +
-                                "\nIniciado em : " + dateFormatUtils.convertUnixStringToDateString(ultimoTrabalho.getTempo_inicio());
+                        resultado = "Id : " + ultimoTrabalho.getTrabalho().getId_usuario() +
+                                "\nNome : " + ultimoTrabalho.getTrabalho().getNome_usuario() +
+                                "\nAtividade : " + ultimoTrabalho.getAtividades().getAtividade() +
+                                "\nIniciado em : " + dateFormatUtils.convertUnixStringToDateString(ultimoTrabalho.getTrabalho().getTempo_inicio());
                         txt_resultado.setText(resultado);
-                        ultimoTrabalho.setLocal(local);
                         btn_finalizar_atividade.setVisibility(View.VISIBLE);
                         btn_iniciar_atividade.setVisibility(View.GONE);
                         btn_finalizar_atividade.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                local = edit_txt_local.getText().toString();
-                                ultimoTrabalho.setLocal(local);
                                 Intent intent = new Intent(IdentificationActivity.this, AddUpdateTrabalhodesActivity.class);
                                 Bundle data = new Bundle();
                                 data.putParcelable("Atualizar nova Tarefa", ultimoTrabalho);
@@ -171,10 +168,10 @@ public class IdentificationActivity extends AppCompatActivity {
             }
         }else if (requestCode ==  UPDATE_NOTE_REQUEST && data != null){
             if (resultCode == RESULT_OK) {
-                Trabalho trabalho = data.getParcelableExtra("Trabalho");
+                TrabalhoComAtividadeRelatorio trabalho = data.getParcelableExtra("Trabalho");
                 //Toast.makeText(this, "Trabalho recebido", Toast.LENGTH_SHORT).show();
                 trabalhoViewModel = ViewModelProviders.of(this).get(TrabalhoViewModel.class);
-                trabalhoViewModel.update(trabalho);
+                trabalhoViewModel.update(trabalho.getTrabalho());
                 Toast.makeText(this, "Trabalho salvo", Toast.LENGTH_LONG).show();
                 finish();
             }
